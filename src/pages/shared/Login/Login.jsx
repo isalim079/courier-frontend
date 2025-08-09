@@ -1,12 +1,15 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { Truck, Mail, Eye, EyeOff, Check } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../../API/useAxiosPublic";
+import toast from "react-hot-toast";
 
 function Login() {
- 
+  const api = useAxiosPublic();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -17,10 +20,15 @@ function Login() {
   const onSubmit = async (data) => {
     setIsLoading(true);
     try {
-      // Handle login logic here
-      console.log("Login data:", data);
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const res = await api.post("/auth/login", data);
+
+      if (res.data.success === true) {
+        setIsLoading(false);
+        toast.success("Login Successful!");
+        setTimeout(() => {
+          navigate(`/dashboard`);
+        }, 3000);
+      }
     } catch (error) {
       console.error("Login error:", error);
     } finally {
@@ -219,7 +227,7 @@ function Login() {
                 {/* Sign Up Link */}
                 <div className="text-center">
                   <Link
-                  to={'/register'}
+                    to={"/register"}
                     className="font-medium text-orange-600 hover:text-orange-500 transition-colors"
                   >
                     Create a new account

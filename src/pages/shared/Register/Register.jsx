@@ -12,11 +12,9 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../API/useAxiosPublic";
 import toast from "react-hot-toast";
-import { useAuth } from "../../../hooks/useAuth";
 
 function Register() {
   const api = useAxiosPublic();
-  const { setUser } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +33,6 @@ function Register() {
       if (res.data.success === true) {
         setIsLoading(false);
         toast.success("Registration Successful!");
-        setUser(res.data.data.user);
         setTimeout(() => {
           navigate(`/dashboard`);
         }, 3000);

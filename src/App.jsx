@@ -3,13 +3,24 @@ import "./App.css";
 import Login from "./pages/shared/Login/Login";
 import Register from "./pages/shared/Register/Register";
 import Dashboard from "./pages/dashboard/Dashboard";
+import DashboardHome from "./pages/dashboard/AdminDashboard/DashboardHome/DashboardHome";
+import AllBookings from "./pages/dashboard/AdminDashboard/AllBookings/AllBookings";
+import AssignAgents from "./pages/dashboard/AdminDashboard/AssignAgents/AssignAgents";
+import AllUsers from "./pages/dashboard/AdminDashboard/AllUsers/AllUsers";
+import Reports from "./pages/dashboard/AdminDashboard/Reports/Reports";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/dashboard" element={<Dashboard />}></Route>
+      <Route path="/dashboard" element={<Dashboard />}>
+        <Route index element={<DashboardHome />} />
+        <Route path="bookings" element={<AllBookings />} />
+        <Route path="assign-agents" element={<AssignAgents />} />
+        <Route path="users" element={<AllUsers />} />
+        <Route path="reports" element={<Reports />} />
+      </Route>
     </Routes>
   );
 }
