@@ -33,7 +33,7 @@ function Sidebar() {
 
   return (
     <div
-      className={`h-screen bg-white border-r border-gray-200 transition-all duration-300 flex flex-col ${
+      className={`h-screen bg-white border-r border-gray-200 transition-all duration-300 flex flex-col sticky top-0 ${
         isCollapsed ? "w-16" : "min-w-[280px]"
       }`}
     >
