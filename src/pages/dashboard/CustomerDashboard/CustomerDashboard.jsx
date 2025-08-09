@@ -1,8 +1,19 @@
+import { Outlet } from "react-router-dom";
+import Sidebar from "./Sidebar/Sidebar";
+
 function CustomerDashboard() {
     return (
-        <div>
-            Dashboard page
-        </div>
+       <div className="min-h-screen bg-gray-50 flex">
+      {/* Sidebar */}
+      <div className="bg-white shadow-lg">
+        <Sidebar />
+      </div>
+
+      {/* Main Content Area */}
+      <div className="flex-1 overflow-hidden">
+        <Outlet />
+      </div>
+    </div>
     );
 };
 

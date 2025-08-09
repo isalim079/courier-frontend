@@ -16,6 +16,10 @@ import DeliveryStatus from "./pages/dashboard/AgentDashboard/DeliveryStatus/Deli
 import RouteMap from "./pages/dashboard/AgentDashboard/RouteMap/RouteMap";
 import DeliveryHistory from "./pages/dashboard/AgentDashboard/DeliveryHistory/DeliveryHistory";
 import CustomerDashboard from "./pages/dashboard/CustomerDashboard/CustomerDashboard";
+import CustomerDashboardHome from "./pages/dashboard/CustomerDashboard/CustomerDashboardHome/CustomerDashboardHome";
+import BookParcel from "./pages/dashboard/CustomerDashboard/BookParcel/BookParcel";
+import TrackParcel from "./pages/dashboard/CustomerDashboard/TrackParcel/TrackParcel";
+import BookingHistory from "./pages/dashboard/CustomerDashboard/BookingHistory/BookingHistory";
 
 function App() {
   return (
@@ -59,7 +63,12 @@ function App() {
             <CustomerDashboard />
           </PrivateRoute>
         }
-      ></Route>
+      >
+        <Route index element={<CustomerDashboardHome />} />
+        <Route path="book-parcel" element={<BookParcel />} />
+        <Route path="track-parcel" element={<TrackParcel />} />
+        <Route path="booking-history" element={<BookingHistory />} />
+      </Route>
     </Routes>
   );
 }
