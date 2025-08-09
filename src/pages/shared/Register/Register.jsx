@@ -11,10 +11,12 @@ import {
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../API/useAxiosPublic";
+import { useAuth } from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 
 function Register() {
   const api = useAxiosPublic();
+  const { setUser } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -31,11 +33,13 @@ function Register() {
       const res = await api.post("/auth/register", data);
       console.log(res);
       if (res.data.success === true) {
+        // Update user state in AuthContext
+        setUser(res.data.data.user);
         setIsLoading(false);
         toast.success("Registration Successful!");
         setTimeout(() => {
           navigate(`/dashboard`);
-        }, 3000);
+        }, 1000);
       }
     } catch (error) {
       toast.error(error.message);

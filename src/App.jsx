@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./pages/shared/Login/Login";
 import Register from "./pages/shared/Register/Register";
+import PrivateRoute from "./utils/PrivateRoute";
 import Dashboard from "./pages/dashboard/Dashboard";
 import DashboardHome from "./pages/dashboard/AdminDashboard/DashboardHome/DashboardHome";
 import AllBookings from "./pages/dashboard/AdminDashboard/AllBookings/AllBookings";
@@ -14,7 +15,14 @@ function App() {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/dashboard" element={<Dashboard />}>
+      <Route 
+        path="/dashboard" 
+        element={
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        }
+      >
         <Route index element={<DashboardHome />} />
         <Route path="bookings" element={<AllBookings />} />
         <Route path="assign-agents" element={<AssignAgents />} />

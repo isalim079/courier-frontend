@@ -3,10 +3,12 @@ import { useState } from "react";
 import { Truck, Mail, Eye, EyeOff, Check } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../API/useAxiosPublic";
+import { useAuth } from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 
 function Login() {
   const api = useAxiosPublic();
+  const { setUser } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -23,14 +25,17 @@ function Login() {
       const res = await api.post("/auth/login", data);
 
       if (res.data.success === true) {
+        // Update user state in AuthContext
+        setUser(res.data.data.user);
         setIsLoading(false);
         toast.success("Login Successful!");
         setTimeout(() => {
           navigate(`/dashboard`);
-        }, 3000);
+        }, 1000);
       }
     } catch (error) {
       console.error("Login error:", error);
+      toast.error("Login failed. Please try again.");
     } finally {
       setIsLoading(false);
     }

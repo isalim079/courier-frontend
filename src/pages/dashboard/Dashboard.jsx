@@ -4,7 +4,7 @@ import Sidebar from "./Sidebar/Sidebar";
 
 function Dashboard() {
   const { user } = useAuth();
-  console.log(user);
+  console.log(user.role);
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
