@@ -1,6 +1,6 @@
 import { User } from "lucide-react";
 
-function SenderForm({ formData, onInputChange }) {
+function SenderForm({ register, errors }) {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
@@ -14,12 +14,16 @@ function SenderForm({ formData, onInputChange }) {
           </label>
           <input
             type="text"
-            required
-            value={formData.senderName}
-            onChange={(e) => onInputChange("", "senderName", e.target.value)}
+            {...register("senderName", { 
+              required: "Full name is required",
+              minLength: { value: 2, message: "Name must be at least 2 characters" }
+            })}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
             placeholder="Enter your full name"
           />
+          {errors.senderName && (
+            <p className="mt-1 text-sm text-red-600">{errors.senderName.message}</p>
+          )}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -27,24 +31,15 @@ function SenderForm({ formData, onInputChange }) {
           </label>
           <input
             type="tel"
-            required
-            value={formData.senderPhone}
-            onChange={(e) => onInputChange("", "senderPhone", e.target.value)}
+            {...register("senderPhone", { 
+              required: "Phone number is required",
+            })}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
             placeholder="Enter your phone number"
           />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Email Address
-          </label>
-          <input
-            type="email"
-            value={formData.senderEmail}
-            onChange={(e) => onInputChange("", "senderEmail", e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-            placeholder="Enter your email"
-          />
+          {errors.senderPhone && (
+            <p className="mt-1 text-sm text-red-600">{errors.senderPhone.message}</p>
+          )}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -52,38 +47,64 @@ function SenderForm({ formData, onInputChange }) {
           </label>
           <input
             type="text"
-            required
-            value={formData.senderCity}
-            onChange={(e) => onInputChange("", "senderCity", e.target.value)}
+            {...register("senderCity", { 
+              required: "City is required",
+              minLength: { value: 2, message: "City must be at least 2 characters" }
+            })}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
             placeholder="Enter your city"
           />
-        </div>
-        <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Complete Address *
-          </label>
-          <textarea
-            required
-            rows={3}
-            value={formData.senderAddress}
-            onChange={(e) => onInputChange("", "senderAddress", e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-            placeholder="Enter your complete address"
-          />
+          {errors.senderCity && (
+            <p className="mt-1 text-sm text-red-600">{errors.senderCity.message}</p>
+          )}
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            PIN Code *
+            Postal Code *
           </label>
           <input
             type="text"
-            required
-            value={formData.senderPincode}
-            onChange={(e) => onInputChange("", "senderPincode", e.target.value)}
+            {...register("senderPostalCode", { 
+              required: "Postal code is required",
+            })}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
-            placeholder="Enter PIN code"
+            placeholder="Enter postal code"
           />
+          {errors.senderPostalCode && (
+            <p className="mt-1 text-sm text-red-600">{errors.senderPostalCode.message}</p>
+          )}
+        </div>
+        <div className="md:col-span-2">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Address Line 1 *
+          </label>
+          <input
+            type="text"
+            {...register("senderAddress1", { 
+              required: "Address is required",
+              minLength: { value: 5, message: "Address must be at least 5 characters" }
+            })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+            placeholder="Enter your address"
+          />
+          {errors.senderAddress1 && (
+            <p className="mt-1 text-sm text-red-600">{errors.senderAddress1.message}</p>
+          )}
+        </div>
+        <div className="md:col-span-2">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Address Line 2 (Optional)
+          </label>
+          <input
+            type="text"
+            {...register("senderAddress2")}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+            placeholder="Apartment, suite, etc. (optional)"
+          />
+        </div>
+        <div className="hidden">
+          <input type="hidden" {...register("senderLat")} />
+          <input type="hidden" {...register("senderLng")} />
         </div>
       </div>
     </div>
