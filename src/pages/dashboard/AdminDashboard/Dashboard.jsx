@@ -1,4 +1,4 @@
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../../hooks/useAuth";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar/Sidebar";
 

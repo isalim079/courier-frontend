@@ -3,7 +3,7 @@ import "./App.css";
 import Login from "./pages/shared/Login/Login";
 import Register from "./pages/shared/Register/Register";
 import PrivateRoute from "./utils/PrivateRoute";
-import Dashboard from "./pages/dashboard/Dashboard";
+import Dashboard from "./pages/dashboard/AdminDashboard/Dashboard";
 import DashboardHome from "./pages/dashboard/AdminDashboard/DashboardHome/DashboardHome";
 import AllBookings from "./pages/dashboard/AdminDashboard/AllBookings/AllBookings";
 import AssignAgents from "./pages/dashboard/AdminDashboard/AssignAgents/AssignAgents";
@@ -15,8 +15,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route 
-        path="/dashboard" 
+      <Route
+        path="/admin.dashboard"
         element={
           <PrivateRoute>
             <Dashboard />

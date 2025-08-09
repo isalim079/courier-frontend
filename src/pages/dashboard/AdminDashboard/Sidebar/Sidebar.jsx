@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { LogOut, Truck, ChevronLeft, ChevronRight } from "lucide-react";
 import { menuItems } from "./SidebarData";
-import { useAuth } from "../../../hooks/useAuth";
+import { useAuth } from "../../../../hooks/useAuth";
 
 function Sidebar() {
   const { logout } = useAuth();

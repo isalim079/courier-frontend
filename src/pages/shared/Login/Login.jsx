@@ -30,7 +30,7 @@ function Login() {
         setIsLoading(false);
         toast.success("Login Successful!");
         setTimeout(() => {
-          navigate(`/dashboard`);
+          navigate(`/${res.data.data.user.role}.dashboard`);
         }, 1000);
       }
     } catch (error) {
