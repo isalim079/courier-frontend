@@ -6,7 +6,6 @@ import PrivateRoute from "./utils/PrivateRoute";
 import Dashboard from "./pages/dashboard/AdminDashboard/Dashboard";
 import DashboardHome from "./pages/dashboard/AdminDashboard/DashboardHome/DashboardHome";
 import AllBookings from "./pages/dashboard/AdminDashboard/AllBookings/AllBookings";
-import AssignAgents from "./pages/dashboard/AdminDashboard/AssignAgents/AssignAgents";
 import AllUsers from "./pages/dashboard/AdminDashboard/AllUsers/AllUsers";
 import Reports from "./pages/dashboard/AdminDashboard/Reports/Reports";
 import AgentDashboard from "./pages/dashboard/AgentDashboard/AgentDashboard";
@@ -20,6 +19,9 @@ import CustomerDashboardHome from "./pages/dashboard/CustomerDashboard/CustomerD
 import BookParcel from "./pages/dashboard/CustomerDashboard/BookParcel/BookParcel";
 import TrackParcel from "./pages/dashboard/CustomerDashboard/TrackParcel/TrackParcel";
 import BookingHistory from "./pages/dashboard/CustomerDashboard/BookingHistory/BookingHistory";
+import AssignAgents from "./pages/dashboard/AdminDashboard/AssignAgents/AssignAgents";
+
+
 
 function App() {
   return (
