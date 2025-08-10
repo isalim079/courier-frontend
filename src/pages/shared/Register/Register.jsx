@@ -33,12 +33,11 @@ function Register() {
       const res = await api.post("/auth/register", data);
       console.log(res);
       if (res.data.success === true) {
-        // Update user state in AuthContext
         setUser(res.data.data.user);
         setIsLoading(false);
         toast.success("Registration Successful!");
         setTimeout(() => {
-          navigate(`/dashboard`);
+          navigate(`/${res.data.data.user.role}dashboard`);
         }, 1000);
       }
     } catch (error) {

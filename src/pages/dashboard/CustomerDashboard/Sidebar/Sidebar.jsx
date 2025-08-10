@@ -5,7 +5,7 @@ import { menuItems } from "./SidebarData";
 import { useAuth } from "../../../../hooks/useAuth";
 
 function Sidebar() {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -28,6 +28,26 @@ function Sidebar() {
 
   const handleLogout = () => {
     logout(navigate);
+  };
+
+
+  const getUserInitials = (name) => {
+    if (!name) return "";
+
+    const words = name.trim().split(" ");
+
+    if (words.length >= 2) {
+      // Take first letter of first word and first letter of last word
+      return (words[0][0] + words[words.length - 1][0]).toUpperCase();
+    } else if (words.length === 1 && words[0].length >= 2) {
+      // Take first two letters of the single word
+      return words[0].substring(0, 2).toUpperCase();
+    } else if (words.length === 1 && words[0].length === 1) {
+      // If only one letter, return it
+      return words[0].toUpperCase();
+    }
+
+    return "";
   };
 
   return (
@@ -121,13 +141,15 @@ function Sidebar() {
         <div className="p-4 border-t border-gray-200 bg-gray-50">
           <div className="flex items-center space-x-3">
             <div className="h-8 w-8 bg-green-500 rounded-full flex items-center justify-center">
-              <span className="text-sm font-medium text-white">C</span>
+              <span className="text-sm font-medium text-white">
+                {getUserInitials(user?.name)}
+              </span>
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-gray-900 truncate">
-                Customer User
+                {user?.name}
               </p>
-              <p className="text-xs text-gray-500 truncate">customer@cpms.com</p>
+              <p className="text-xs text-gray-500 truncate">{user?.email}</p>
             </div>
           </div>
         </div>
