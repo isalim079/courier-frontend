@@ -11,7 +11,6 @@ import Reports from "./pages/dashboard/AdminDashboard/Reports/Reports";
 import AgentDashboard from "./pages/dashboard/AgentDashboard/AgentDashboard";
 import AgentDashboardHome from "./pages/dashboard/AgentDashboard/AgentDashboardHome/AgentDashboardHome";
 import AssignedParcels from "./pages/dashboard/AgentDashboard/AssignedParcels/AssignedParcels";
-import DeliveryStatus from "./pages/dashboard/AgentDashboard/DeliveryStatus/DeliveryStatus";
 import RouteMap from "./pages/dashboard/AgentDashboard/RouteMap/RouteMap";
 import DeliveryHistory from "./pages/dashboard/AgentDashboard/DeliveryHistory/DeliveryHistory";
 import CustomerDashboard from "./pages/dashboard/CustomerDashboard/CustomerDashboard";
@@ -53,7 +52,6 @@ function App() {
       >
         <Route index element={<AgentDashboardHome />} />
         <Route path="assigned-parcels" element={<AssignedParcels />} />
-        <Route path="delivery-status" element={<DeliveryStatus />} />
         <Route path="route-map" element={<RouteMap />} />
         <Route path="delivery-history" element={<DeliveryHistory />} />
       </Route>

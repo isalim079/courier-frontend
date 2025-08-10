@@ -20,12 +20,7 @@ export const menuItems = [
     icon: Package,
     path: "/agent.dashboard/assigned-parcels",
   },
-  {
-    id: "delivery-status",
-    label: "Update Delivery Status",
-    icon: CheckCircle,
-    path: "/agent.dashboard/delivery-status",
-  },
+
   {
     id: "route-map",
     label: "Optimized Routes",

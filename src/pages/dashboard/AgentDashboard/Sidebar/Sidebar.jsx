@@ -15,7 +15,6 @@ function Sidebar() {
     const path = location.pathname;
     if (path === "/agent.dashboard") return "dashboard";
     if (path.includes("/assigned-parcels")) return "assigned-parcels";
-    if (path.includes("/delivery-status")) return "delivery-status";
     if (path.includes("/route-map")) return "route-map";
     if (path.includes("/delivery-history")) return "delivery-history";
     return "dashboard";
@@ -45,7 +44,9 @@ function Sidebar() {
               <div className="h-8 w-8 bg-blue-500 rounded-full flex items-center justify-center">
                 <Truck className="h-5 w-5 text-white" />
               </div>
-              <span className="text-xl font-bold text-blue-600">CPMS Agent</span>
+              <span className="text-xl font-bold text-blue-600">
+                CPMS Agent
+              </span>
             </div>
           )}
 
@@ -123,15 +124,15 @@ function Sidebar() {
           <div className="flex items-center space-x-3">
             <div className="h-8 w-8 bg-blue-500 rounded-full flex items-center justify-center">
               <span className="text-sm font-medium text-white">
-                {user?.name?.charAt(0)?.toUpperCase() || 'A'}
+                {user?.name?.charAt(0)?.toUpperCase() || "A"}
               </span>
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-gray-900 truncate">
-                {user?.name || 'Agent'}
+                {user?.name || "Agent"}
               </p>
               <p className="text-xs text-gray-500 truncate">
-                {user?.email || 'agent@cpms.com'}
+                {user?.email || "agent@cpms.com"}
               </p>
               <p className="text-xs text-blue-600 font-medium">
                 Delivery Agent
