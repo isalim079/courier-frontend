@@ -13,7 +13,7 @@ function Sidebar() {
   // Get active item from current path
   const getActiveItem = () => {
     const path = location.pathname;
-    if (path === "/dashboard") return "dashboard";
+    if (path === "/admin.dashboard") return "dashboard";
     if (path.includes("/bookings")) return "bookings";
     if (path.includes("/assign-agents")) return "assign-agents";
     if (path.includes("/users")) return "users";
@@ -51,7 +51,7 @@ function Sidebar() {
 
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="p-1 rounded-lg hover:bg-gray-100 transition-colors"
+            className="p-1 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
           >
             {isCollapsed ? (
               <ChevronRight className="h-5 w-5 text-gray-600" />
@@ -79,7 +79,7 @@ function Sidebar() {
                   onClick={() => handleItemClick(item)}
                   className={`w-full flex items-center space-x-3 ${
                     isCollapsed ? "p-2" : "px-3 py-3"
-                  } rounded-lg transition-all duration-200 group ${
+                  } rounded-lg transition-all duration-200 group cursor-pointer ${
                     isActive
                       ? "bg-orange-100 text-orange-700 border border-orange-200"
                       : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
