@@ -1,4 +1,4 @@
-import { Package } from 'lucide-react';
+import { Package } from "lucide-react";
 
 function AssignInstructions({ selectedBooking }) {
   if (selectedBooking) return null;

@@ -42,16 +42,10 @@ const AssignAgents = () => {
     fetchData();
   }, [fetchData]);
 
-  console.log(allBookings, "=> all bookings");
   // Filter unassigned bookings (assignedAgent is null or undefined)
   const unassignedBookings = allBookings.filter((booking) => {
     const hasNoAgent = !booking.assignedAgent || booking.assignedAgent === null;
 
-    console.log(
-      `Booking ${booking.id}: assignedAgent = ${JSON.stringify(
-        booking.assignedAgent
-      )}, hasNoAgent = ${hasNoAgent}`
-    );
     return hasNoAgent;
   });
 
@@ -62,14 +56,8 @@ const AssignAgents = () => {
 
   const availableAgents = allAgents.filter((agent) => {
     const isNotAssigned = !assignedAgentIds.includes(agent.id);
-    console.log(
-      `Agent ${agent.id} (${agent.name}): isNotAssigned = ${isNotAssigned}`
-    );
     return isNotAssigned;
   });
-
-  console.log("Unassigned bookings count:", unassignedBookings.length);
-  console.log("Available agents count:", availableAgents.length);
 
   // Handle agent assignment
   const handleAssignAgent = async (agentId) => {
@@ -107,6 +95,7 @@ const AssignAgents = () => {
       <AssignAgentsHeader
         unassignedCount={unassignedBookings.length}
         availableAgentsCount={availableAgents.length}
+        totalAgentsCount={allAgents.length}
       />
 
       <AssignInstructions selectedBooking={selectedBooking} />
@@ -119,7 +108,8 @@ const AssignAgents = () => {
         />
 
         <AvailableAgents
-          agents={availableAgents}
+          agents={allAgents}
+          allBookings={allBookings}
           selectedBooking={selectedBooking}
           onAssignAgent={handleAssignAgent}
           assignLoading={assignmentLoading}
