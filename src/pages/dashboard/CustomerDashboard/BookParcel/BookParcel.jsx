@@ -104,7 +104,7 @@ function BookParcel() {
         },
         parcelDetails: {
           type: data.parcelType,
-          weight: parseFloat(data.weightRange.split("-")[0]),
+          weight: data.weightRanges,
           description: data.description,
           specialInstructions: data.specialInstructions || "",
         },
