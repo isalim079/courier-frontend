@@ -113,7 +113,7 @@ function AllBookingsTable({
                       <Edit className="h-4 w-4" />
                     </button>
                     <button 
-                      onClick={() => onDeleteBooking(booking._id)}
+                      onClick={() => onDeleteBooking(booking?.id)}
                       className="p-1 text-gray-400 hover:text-red-600 transition-colors cursor-pointer"
                       title="Delete Booking"
                     >
