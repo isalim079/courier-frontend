@@ -3,9 +3,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { LogOut, Truck, ChevronLeft, ChevronRight } from "lucide-react";
 import { menuItems } from "./SidebarData";
 import { useAuth } from "../../../../hooks/useAuth";
+import { GetUserNameInitials } from "../../../../utils/GetUserNameInitials";
 
 function Sidebar() {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -122,13 +123,15 @@ function Sidebar() {
         <div className="p-4 border-t border-gray-200 bg-gray-50">
           <div className="flex items-center space-x-3">
             <div className="h-8 w-8 bg-orange-500 rounded-full flex items-center justify-center">
-              <span className="text-sm font-medium text-white">A</span>
+              <span className="text-sm font-medium text-white">
+                {GetUserNameInitials(user?.name)}
+              </span>
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-gray-900 truncate">
-                Admin User
+                {user?.name}
               </p>
-              <p className="text-xs text-gray-500 truncate">admin@cpms.com</p>
+              <p className="text-xs text-gray-500 truncate">{user?.email}</p>
             </div>
           </div>
         </div>
