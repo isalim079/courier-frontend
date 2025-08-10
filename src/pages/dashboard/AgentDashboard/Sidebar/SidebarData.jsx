@@ -1,8 +1,6 @@
 import {
   LayoutDashboard,
   Package,
-  CheckCircle,
-  MapPin,
   Route,
   Clock,
 } from "lucide-react";
@@ -19,13 +17,6 @@ export const menuItems = [
     label: "Assigned Parcels",
     icon: Package,
     path: "/agent.dashboard/assigned-parcels",
-  },
-
-  {
-    id: "route-map",
-    label: "Optimized Routes",
-    icon: Route,
-    path: "/agent.dashboard/route-map",
   },
   {
     id: "delivery-history",
