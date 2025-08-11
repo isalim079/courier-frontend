@@ -6,7 +6,8 @@ import Sidebar from "./Sidebar/Sidebar";
 import LocationPermissionModal from "../../../components/LocationPermissionModal";
 import LocationStatusIndicator from "../../../components/LocationStatusIndicator";
 
-const SOCKET_URL = "http://localhost:3003";
+// Get Socket URL from environment variables
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || "http://localhost:3003";
 const ENABLE_SOCKET = true;
 
 function AgentDashboard() {
