@@ -16,8 +16,33 @@ function Login() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
+
+  // Function to fill credentials for different user types
+  const fillCredentials = (userType) => {
+    const credentials = {
+      admin: {
+        email: "salim@mail.com",
+        password: "123456"
+      },
+      customer: {
+        email: "salim2@mail.com",
+        password: "123456"
+      },
+      agent: {
+        email: "salim3@mail.com",
+        password: "123456"
+      }
+    };
+
+    const selectedCredentials = credentials[userType];
+    if (selectedCredentials) {
+      setValue("email", selectedCredentials.email);
+      setValue("password", selectedCredentials.password);
+    }
+  };
 
   const onSubmit = async (data) => {
     setIsLoading(true);
@@ -244,6 +269,32 @@ function Login() {
             {/* Footer */}
             <div className="text-center text-sm text-gray-500 mt-8">
               <p>&copy; 2025 Courier Management System. All rights reserved.</p>
+            </div>
+            <div className="text-center text-sm text-gray-500 mt-2">
+              <p className="font-semibold">Credentials for testing: </p>
+              <div className="space-x-3">
+                <button 
+                  type="button"
+                  onClick={() => fillCredentials('admin')}
+                  className="underline cursor-pointer hover:text-orange-600 transition-colors"
+                >
+                  Admin
+                </button>
+                <button 
+                  type="button"
+                  onClick={() => fillCredentials('customer')}
+                  className="underline cursor-pointer hover:text-orange-600 transition-colors"
+                >
+                  Customer
+                </button>
+                <button 
+                  type="button"
+                  onClick={() => fillCredentials('agent')}
+                  className="underline cursor-pointer hover:text-orange-600 transition-colors"
+                >
+                  Agent
+                </button>
+              </div>
             </div>
           </div>
         </div>
