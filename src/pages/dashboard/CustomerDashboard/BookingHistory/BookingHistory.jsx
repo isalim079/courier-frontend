@@ -148,7 +148,7 @@ function BookingHistory() {
       ].join(","),
       ...filteredBookings.map((booking) =>
         [
-          booking.trackingId || booking._id,
+          booking.trackingId,
           booking.receiverInfo?.name || "N/A",
           (booking.receiverInfo?.address1 || "N/A").replace(/,/g, ";"),
           booking.status,

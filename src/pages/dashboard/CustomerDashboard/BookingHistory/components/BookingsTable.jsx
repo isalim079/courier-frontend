@@ -1,4 +1,5 @@
 import { Package, Eye, MapPin, Calendar, DollarSign } from "lucide-react";
+import Loading from "../../../../../components/ui/Loading";
 
 function BookingsTable({ bookings, loading, onTrackParcel }) {
   const getStatusColor = (status) => {
@@ -39,12 +40,7 @@ function BookingsTable({ bookings, loading, onTrackParcel }) {
 
   if (loading) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-        <div className="p-8 text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-500 mx-auto"></div>
-          <p className="mt-2 text-gray-600">Loading bookings...</p>
-        </div>
-      </div>
+     <Loading />
     );
   }
 
@@ -80,7 +76,7 @@ function BookingsTable({ bookings, loading, onTrackParcel }) {
                 Status
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Date
+                Pickup Schedule
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 COD Amount
@@ -92,10 +88,10 @@ function BookingsTable({ bookings, loading, onTrackParcel }) {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {bookings.map((booking) => (
-              <tr key={booking.trackingId || booking._id} className="hover:bg-gray-50">
+              <tr key={booking.trackingId } className="hover:bg-gray-50">
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm font-medium text-gray-900">
-                    {booking.trackingId || booking._id}
+                    {booking.trackingId }
                   </div>
                   <div className="text-sm text-gray-500">
                     {booking.parcelDetails?.type || "N/A"}
@@ -115,7 +111,7 @@ function BookingsTable({ bookings, loading, onTrackParcel }) {
                     {booking.receiverInfo?.city && `, ${booking.receiverInfo.city}`}
                   </div>
                   <div className="text-sm text-gray-500">
-                    {booking.parcelDetails?.weight ? `${booking.parcelDetails.weight}kg` : "N/A"}
+                    {booking.parcelDetails?.weight ? `${booking.parcelDetails.weight}` : "N/A"}
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -125,7 +121,7 @@ function BookingsTable({ bookings, loading, onTrackParcel }) {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-900">
-                    {formatDate(booking.createdAt)}
+                    {formatDate(booking.pickupSchedule)}
                   </div>
                   <div className="text-sm text-gray-500">
                     {booking.payment?.method || "N/A"}
@@ -139,7 +135,7 @@ function BookingsTable({ bookings, loading, onTrackParcel }) {
                 <td className="px-6 py-4 whitespace-nowrap">
                   {booking.status !== "Failed" && (
                     <button
-                      onClick={() => onTrackParcel(booking.trackingId || booking._id)}
+                      onClick={() => onTrackParcel(booking.trackingId)}
                       className="flex items-center space-x-1 text-green-600 hover:text-green-700 text-sm font-medium cursor-pointer"
                     >
                       <Eye className="h-4 w-4" />
