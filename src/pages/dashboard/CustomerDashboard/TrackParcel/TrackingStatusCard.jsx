@@ -10,10 +10,52 @@ function TrackingStatusCard({ trackingData }) {
       case "Out for Delivery":
         return "bg-orange-100 text-orange-800 border-orange-200";
       case "Pending Pickup":
+      case "Pending":
         return "bg-yellow-100 text-yellow-800 border-yellow-200";
       default:
         return "bg-gray-100 text-gray-800 border-gray-200";
     }
+  };
+
+  // Calculate estimated delivery (pickup + 5 days)
+  const getEstimatedDelivery = () => {
+    if (trackingData.status === "Delivered") {
+      return new Date(trackingData.updatedAt).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short", 
+        day: "numeric"
+      });
+    }
+    
+    if (trackingData.pickupSchedule) {
+      const pickup = new Date(trackingData.pickupSchedule);
+      const estimated = new Date(pickup);
+      estimated.setDate(pickup.getDate() + 5);
+      return estimated.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short", 
+        day: "numeric"
+      });
+    }
+    
+    return "TBD";
+  };
+
+  // Get current location description
+  const getCurrentLocation = () => {
+    if (trackingData.status === "Delivered") {
+      return `Delivered to ${trackingData.receiverInfo.name}`;
+    }
+    
+    if (trackingData.status === "In Transit" && trackingData.agentLocation) {
+      return `Agent Location: ${trackingData.agentLocation.lat.toFixed(4)}, ${trackingData.agentLocation.lng.toFixed(4)}`;
+    }
+    
+    if (trackingData.status === "Pending" || trackingData.status === "Pending Pickup") {
+      return `Awaiting pickup from ${trackingData.senderInfo.city}`;
+    }
+    
+    return "Location updating...";
   };
 
   return (
@@ -25,10 +67,10 @@ function TrackingStatusCard({ trackingData }) {
           </div>
           <div>
             <h2 className="text-xl font-bold text-gray-900">
-              {trackingData.id}
+              {trackingData.trackingId}
             </h2>
             <p className="text-gray-600">
-              {trackingData.package.description}
+              {trackingData.parcelDetails?.description || `${trackingData.parcelDetails?.type} parcel`}
             </p>
           </div>
         </div>
@@ -45,7 +87,7 @@ function TrackingStatusCard({ trackingData }) {
         <div>
           <p className="text-gray-500">Current Location:</p>
           <p className="font-medium text-gray-900">
-            {trackingData.currentLocation}
+            {getCurrentLocation()}
           </p>
         </div>
         <div>
@@ -55,13 +97,13 @@ function TrackingStatusCard({ trackingData }) {
               : "Estimated Delivery:"}
           </p>
           <p className="font-medium text-gray-900">
-            {trackingData.deliveredAt || trackingData.estimatedDelivery}
+            {getEstimatedDelivery()}
           </p>
         </div>
         <div>
-          <p className="text-gray-500">Service Type:</p>
+          <p className="text-gray-500">Assigned Agent:</p>
           <p className="font-medium text-gray-900">
-            {trackingData.service.type}
+            {trackingData.assignedAgent?.name || "Not assigned yet"}
           </p>
         </div>
       </div>

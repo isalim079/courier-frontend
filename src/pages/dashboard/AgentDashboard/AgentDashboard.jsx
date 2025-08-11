@@ -375,37 +375,6 @@ function AgentDashboard() {
     }, 1000);
   };
 
-  // Test function to manually emit location update
-  const testLocationEmit = () => {
-    const testLocation = {
-      lat: 40.7128, // NYC coordinates for testing
-      lng: -74.0060
-    };
-
-    console.log("🧪 Testing manual location emit...");
-    
-    if (socketRef.current && socketRef.current.connected && ENABLE_SOCKET) {
-      // console.log("🧪 Emitting test location:", testLocation);
-      
-      try {
-        socketRef.current.emit("agent_location_update", testLocation);
-        console.log("✅ Test emit successful");
-        toast.success("Test location sent!");
-      } catch (error) {
-        console.error("❌ Test emit failed:", error);
-        toast.error("Test emit failed");
-      }
-    } else {
-      console.log("⚠️ Cannot test emit - socket not ready:", {
-        hasSocket: !!socketRef.current,
-        isConnected,
-        actualSocketConnected: socketRef.current?.connected,
-        enableSocket: ENABLE_SOCKET
-      });
-      toast.error("Socket not connected for testing");
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
@@ -423,16 +392,6 @@ function AgentDashboard() {
             currentLocation={currentLocation}
             onRequestPermission={handleRequestPermission}
           />
-          
-          {/* Temporary test button for debugging */}
-          {socketRef.current && socketRef.current.connected && (
-            <button
-              onClick={testLocationEmit}
-              className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm"
-            >
-              🧪 Test Manual Location Emit
-            </button>
-          )}
           
           {error && (
             <div className="mt-2 text-sm text-red-600 bg-red-50 p-2 rounded">

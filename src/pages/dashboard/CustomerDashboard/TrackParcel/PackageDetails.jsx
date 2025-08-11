@@ -11,25 +11,52 @@ function PackageDetails({ trackingData }) {
         <div className="flex justify-between">
           <span className="text-gray-600">Type:</span>
           <span className="font-medium text-gray-900">
-            {trackingData.package.type}
+            {trackingData.parcelDetails?.type || "N/A"}
           </span>
         </div>
         <div className="flex justify-between">
           <span className="text-gray-600">Weight:</span>
           <span className="font-medium text-gray-900">
-            {trackingData.package.weight}
-          </span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-gray-600">Dimensions:</span>
-          <span className="font-medium text-gray-900">
-            {trackingData.package.dimensions}
+            {trackingData.parcelDetails?.weight || "N/A"}
           </span>
         </div>
         <div className="flex justify-between">
           <span className="text-gray-600">Description:</span>
           <span className="font-medium text-gray-900">
-            {trackingData.package.description}
+            {trackingData.parcelDetails?.description || "N/A"}
+          </span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-gray-600">Special Instructions:</span>
+          <span className="font-medium text-gray-900">
+            {trackingData.parcelDetails?.specialInstructions || "None"}
+          </span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-gray-600">Payment Method:</span>
+          <span className="font-medium text-gray-900">
+            {trackingData.payment?.method || "N/A"}
+          </span>
+        </div>
+        {trackingData.payment?.method === "COD" && (
+          <div className="flex justify-between">
+            <span className="text-gray-600">COD Amount:</span>
+            <span className="font-medium text-gray-900">
+              ৳{trackingData.payment?.codAmount || 0}
+            </span>
+          </div>
+        )}
+        <div className="flex justify-between">
+          <span className="text-gray-600">Pickup Schedule:</span>
+          <span className="font-medium text-gray-900">
+            {trackingData.pickupSchedule 
+              ? new Date(trackingData.pickupSchedule).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short", 
+                  day: "numeric"
+                })
+              : "N/A"
+            }
           </span>
         </div>
       </div>

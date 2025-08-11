@@ -56,8 +56,16 @@ function RecentBookings({ bookings, loading }) {
 
   const getDateValue = (booking) => {
     if (booking.status === "Delivered") return formatDate(booking.deliveredAt);
-    if (booking.status === "In Transit")
-      return formatDate(booking.estimatedDelivery);
+    if (booking.status === "In Transit") {
+      // Calculate estimated delivery by adding 5 days to pickup schedule
+      if (booking.pickupSchedule) {
+        const pickupDate = new Date(booking.pickupSchedule);
+        const estimatedDelivery = new Date(pickupDate);
+        estimatedDelivery.setDate(pickupDate.getDate() + 5);
+        return formatDate(estimatedDelivery);
+      }
+      return "N/A";
+    }
     if (booking.status === "Pending" || booking.status === "Pending Pickup")
       return formatDate(booking.pickupSchedule);
     return formatDate(booking.createdAt || booking.date);
@@ -132,7 +140,7 @@ function RecentBookings({ bookings, loading }) {
         <div className="space-y-4">
           {bookings.slice(0, 3).map((booking) => (
             <div
-              key={booking.trackingId || booking._id}
+              key={booking.trackingId}
               className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors"
             >
               <div className="flex items-center justify-between mb-3">
@@ -142,10 +150,10 @@ function RecentBookings({ bookings, loading }) {
                   </div>
                   <div>
                     <h3 className="font-medium text-gray-900">
-                      {booking.trackingId || booking._id}
+                      {booking.trackingId}
                     </h3>
                     <p className="text-sm text-gray-500">
-                      To: {booking.receiverInfo?.name || booking.recipient}
+                      To: {booking.receiverInfo?.name}
                     </p>
                   </div>
                 </div>
@@ -162,7 +170,7 @@ function RecentBookings({ bookings, loading }) {
                 <div>
                   <p className="text-gray-500">Delivery Address:</p>
                   <p className="text-gray-900 font-medium">
-                    {booking.receiverInfo?.address1 || booking.address}
+                    {booking.receiverInfo?.address1}
                     {booking.receiverInfo?.city &&
                       `, ${booking.receiverInfo.city}`}
                   </p>

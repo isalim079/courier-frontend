@@ -13,19 +13,24 @@ function ContactInformation({ trackingData }) {
           <h4 className="font-medium text-gray-900 mb-2">Sender:</h4>
           <div className="space-y-1 text-sm text-gray-600">
             <p className="font-medium text-gray-900">
-              {trackingData.sender.name}
+              {trackingData.senderInfo?.name || "N/A"}
             </p>
             <div className="flex items-center space-x-2">
               <Phone className="h-3 w-3" />
-              <span>{trackingData.sender.phone}</span>
+              <span>{trackingData.senderInfo?.phone || "N/A"}</span>
             </div>
             <div className="flex items-center space-x-2">
               <Mail className="h-3 w-3" />
-              <span>{trackingData.sender.email}</span>
+              <span>{trackingData.customer?.email || "N/A"}</span>
             </div>
             <div className="flex items-start space-x-2">
               <MapPin className="h-3 w-3 mt-0.5" />
-              <span>{trackingData.sender.address}</span>
+              <span>
+                {trackingData.senderInfo?.address1}
+                {trackingData.senderInfo?.address2 && `, ${trackingData.senderInfo.address2}`}
+                {trackingData.senderInfo?.city && `, ${trackingData.senderInfo.city}`}
+                {trackingData.senderInfo?.postalCode && ` - ${trackingData.senderInfo.postalCode}`}
+              </span>
             </div>
           </div>
         </div>
@@ -35,22 +40,47 @@ function ContactInformation({ trackingData }) {
           <h4 className="font-medium text-gray-900 mb-2">Recipient:</h4>
           <div className="space-y-1 text-sm text-gray-600">
             <p className="font-medium text-gray-900">
-              {trackingData.recipient.name}
+              {trackingData.receiverInfo?.name || "N/A"}
             </p>
             <div className="flex items-center space-x-2">
               <Phone className="h-3 w-3" />
-              <span>{trackingData.recipient.phone}</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Mail className="h-3 w-3" />
-              <span>{trackingData.recipient.email}</span>
+              <span>{trackingData.receiverInfo?.phone || "N/A"}</span>
             </div>
             <div className="flex items-start space-x-2">
               <MapPin className="h-3 w-3 mt-0.5" />
-              <span>{trackingData.recipient.address}</span>
+              <span>
+                {trackingData.receiverInfo?.address1}
+                {trackingData.receiverInfo?.address2 && `, ${trackingData.receiverInfo.address2}`}
+                {trackingData.receiverInfo?.city && `, ${trackingData.receiverInfo.city}`}
+                {trackingData.receiverInfo?.postalCode && ` - ${trackingData.receiverInfo.postalCode}`}
+              </span>
             </div>
           </div>
         </div>
+
+        {/* Assigned Agent */}
+        {trackingData.assignedAgent && (
+          <div>
+            <h4 className="font-medium text-gray-900 mb-2">Assigned Agent:</h4>
+            <div className="space-y-1 text-sm text-gray-600">
+              <p className="font-medium text-gray-900">
+                {trackingData.assignedAgent.name}
+              </p>
+              <div className="flex items-center space-x-2">
+                <Mail className="h-3 w-3" />
+                <span>{trackingData.assignedAgent.email}</span>
+              </div>
+              {trackingData.agentLocation && (
+                <div className="flex items-start space-x-2">
+                  <MapPin className="h-3 w-3 mt-0.5" />
+                  <span>
+                    Current Location: {trackingData.agentLocation.lat.toFixed(4)}, {trackingData.agentLocation.lng.toFixed(4)}
+                  </span>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

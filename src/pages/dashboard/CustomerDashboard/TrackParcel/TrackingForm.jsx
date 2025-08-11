@@ -1,11 +1,11 @@
 import { Search, AlertCircle } from "lucide-react";
 
-function TrackingForm({ 
-  trackingNumber, 
-  setTrackingNumber, 
-  onSubmit, 
-  isLoading, 
-  error 
+function TrackingForm({
+  trackingNumber,
+  setTrackingNumber,
+  onSubmit,
+  isLoading,
+  error,
 }) {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
@@ -41,16 +41,20 @@ function TrackingForm({
             </button>
           </div>
         </div>
-        
+
         {error && (
           <div className="flex items-center space-x-2 text-red-600 bg-red-50 p-3 rounded-lg">
             <AlertCircle className="h-5 w-5" />
             <span className="text-sm">{error}</span>
           </div>
         )}
-        
+
         <div className="text-sm text-gray-500">
-          <p>Try sample tracking numbers: <span className="font-medium text-green-600">trkId001</span> or <span className="font-medium text-green-600">trkId002</span></p>
+          <p>
+            Try sample tracking numbers:{" "}
+            <span className="font-medium text-green-600">trkId001</span> or{" "}
+            <span className="font-medium text-green-600">trkId002</span>
+          </p>
         </div>
       </form>
     </div>
