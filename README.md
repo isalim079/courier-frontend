@@ -234,48 +234,11 @@ The application uses Google Maps for:
 - Safari
 - Edge
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/new-feature`)
-3. Commit your changes (`git commit -am 'Add new feature'`)
-4. Push to the branch (`git push origin feature/new-feature`)
-5. Create a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## 👨‍💻 Author
 
 **Isalim079**
 - GitHub: [@isalim079](https://github.com/isalim079)
 
-## 🐛 Issues & Support
-
-If you encounter any issues or need support:
-1. Check the [Issues](https://github.com/isalim079/courier-frontend/issues) page
-2. Create a new issue with detailed description
-3. Include steps to reproduce the problem
-
-## 🔄 Version History
-
-- **v0.0.0** - Initial release with basic courier management features
-- Real-time tracking system
-- Role-based dashboards
-- Google Maps integration
-
----
 
 **Built with ❤️ using React, Vite, and Tailwind CSS**+ Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
