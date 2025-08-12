@@ -104,7 +104,7 @@ function BookParcel() {
         },
         parcelDetails: {
           type: data.parcelType,
-          weight: data.weightRanges,
+          weight: data.weightRange,
           description: data.description,
           specialInstructions: data.specialInstructions || "",
         },
@@ -114,6 +114,7 @@ function BookParcel() {
         },
         pickupSchedule: new Date(data.pickupSchedule),
       };
+
 
       const res = await api.post("/parcel/bookAParcel", parcelData);
 
