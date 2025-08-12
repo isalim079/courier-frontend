@@ -65,7 +65,7 @@ function Reports() {
 
     // Calculate revenue (sum of all payment amounts)
     const totalRevenue = bookingsData.reduce((sum, booking) => {
-      return sum + (booking.payment?.amount || 0);
+      return sum + (booking.payment?.codAmount || 0);
     }, 0);
 
     // Count bookings by status
