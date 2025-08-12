@@ -1,4 +1,4 @@
-import { BarChart3 } from 'lucide-react';
+import { BarChart3 } from "lucide-react";
 
 function BookingsChart({ bookings, loading }) {
   if (loading) {
@@ -22,16 +22,17 @@ function BookingsChart({ bookings, loading }) {
   }
 
   // Group bookings by status for the chart
-  const statusCounts = bookings?.reduce((acc, booking) => {
-    const status = booking.status || 'pending';
-    acc[status] = (acc[status] || 0) + 1;
-    return acc;
-  }, {}) || {};
+  const statusCounts =
+    bookings?.reduce((acc, booking) => {
+      const status = booking.status || "pending";
+      acc[status] = (acc[status] || 0) + 1;
+      return acc;
+    }, {}) || {};
 
   const statusData = Object.entries(statusCounts).map(([status, count]) => ({
     status: status.charAt(0).toUpperCase() + status.slice(1),
     count,
-    percentage: bookings?.length ? (count / bookings.length) * 100 : 0
+    percentage: bookings?.length ? (count / bookings.length) * 100 : 0,
   }));
 
   return (
@@ -47,23 +48,29 @@ function BookingsChart({ bookings, loading }) {
           {statusData.map((item, index) => (
             <div key={index} className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <span className="font-medium text-gray-900 w-20">{item.status}</span>
+                <span className="font-medium text-gray-900 w-20">
+                  {item.status}
+                </span>
                 <div className="w-32 bg-gray-200 rounded-full h-2">
-                  <div 
-                    className="bg-blue-600 h-2 rounded-full" 
+                  <div
+                    className="bg-blue-600 h-2 rounded-full"
                     style={{ width: `${item.percentage}%` }}
                   ></div>
                 </div>
               </div>
               <div className="text-right">
                 <p className="font-medium text-gray-900">{item.count}</p>
-                <p className="text-sm text-gray-500">{item.percentage.toFixed(1)}%</p>
+                <p className="text-sm text-gray-500">
+                  {item.percentage.toFixed(1)}%
+                </p>
               </div>
             </div>
           ))}
         </div>
         {statusData.length === 0 && (
-          <p className="text-center text-gray-500 py-8">No bookings data available</p>
+          <p className="text-center text-gray-500 py-8">
+            No bookings data available
+          </p>
         )}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { Users } from 'lucide-react';
+import { Users } from "lucide-react";
 
 function AgentsPerformance({ agents, bookings, loading }) {
   if (loading) {
@@ -28,24 +28,30 @@ function AgentsPerformance({ agents, bookings, loading }) {
   }
 
   // Calculate agent performance based on assigned bookings
-  const agentPerformance = agents?.map(agent => {
-    const assignedBookings = bookings?.filter(booking => 
-      booking.assignedAgent && booking.assignedAgent._id === agent.id
-    ) || [];
-    
-    const completedBookings = assignedBookings.filter(booking => 
-      booking.status === 'delivered'
-    );
+  const agentPerformance =
+    agents
+      ?.map((agent) => {
+        const assignedBookings =
+          bookings?.filter(
+            (booking) =>
+              booking.assignedAgent && booking.assignedAgent._id === agent.id
+          ) || [];
 
-    return {
-      ...agent,
-      assignedCount: assignedBookings.length,
-      completedCount: completedBookings.length,
-      completionRate: assignedBookings.length > 0 
-        ? (completedBookings.length / assignedBookings.length) * 100 
-        : 0
-    };
-  }).filter(agent => agent.assignedCount > 0) || [];
+        const completedBookings = assignedBookings.filter(
+          (booking) => booking.status === "Delivered"
+        );
+
+        return {
+          ...agent,
+          assignedCount: assignedBookings.length,
+          completedCount: completedBookings.length,
+          completionRate:
+            assignedBookings.length > 0
+              ? (completedBookings.length / assignedBookings.length) * 100
+              : 0,
+        };
+      })
+      .filter((agent) => agent.assignedCount > 0) || [];
 
   // Sort by completion rate
   const topAgents = agentPerformance
@@ -67,7 +73,10 @@ function AgentsPerformance({ agents, bookings, loading }) {
               <div className="flex items-center space-x-3">
                 <div className="h-8 w-8 bg-orange-500 rounded-full flex items-center justify-center">
                   <span className="text-white text-sm font-medium">
-                    {agent.name.split(' ').map(n => n[0]).join('')}
+                    {agent.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
                   </span>
                 </div>
                 <div>
@@ -87,7 +96,9 @@ function AgentsPerformance({ agents, bookings, loading }) {
           ))}
         </div>
         {topAgents.length === 0 && (
-          <p className="text-center text-gray-500 py-8">No agent performance data available</p>
+          <p className="text-center text-gray-500 py-8">
+            No agent performance data available
+          </p>
         )}
       </div>
     </div>
